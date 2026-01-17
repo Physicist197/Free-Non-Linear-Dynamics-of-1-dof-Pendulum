@@ -13,7 +13,7 @@ ylabel("Angular displacement")
 grid on
 hold on
 for n = [1 2 3]
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((sign(theta(2))^(n - 1))*(theta(2)^n))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((abs(theta(2))^(n - 1))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(t, theta(:, 1))
     xlabel("time")
     ylabel("Angular displacement")
@@ -31,7 +31,7 @@ ylabel("Angular velocity")
 grid on
 hold on
 for n = [1 2 3]
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((sign(theta(2))^(n - 1))*(theta(2)^n))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((abs(theta(2))^(n - 1))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(t, theta(:, 2))
     xlabel("time")
     ylabel("Angular velocity")
@@ -49,7 +49,7 @@ ylabel("Angular velocity")
 grid on
 hold on
 for n = [1 2 3]
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((sign(theta(2))^(n - 1))*(theta(2)^n))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((abs(theta(2))^(n - 1))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(theta(:, 1), theta(:, 2))
     xlabel("Angular displacement")
     ylabel("Angular velocity")
@@ -71,7 +71,7 @@ ylabel("Energy")
 grid on
 hold on
 for n = [1 2 3 4]
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((sign(theta(2))^(n - 1))*(theta(2)^n))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*(((abs(theta(2))^(n - 1))*(theta(2)))))], [0, 15], [pi/3, 0]);
     E = (0.5*m*(l^2)).*(theta(:, 2).^2) + (m*g*l).*(1 - cos(theta(:, 1)));
     plot(t, E)
     xlabel("time")
