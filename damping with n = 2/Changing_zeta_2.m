@@ -7,7 +7,7 @@ omega_n = sqrt(g/l);
 %Angular displacement for different damping values(b)
 for b = [0 1 2 3]
     zeta = (b*(l^3))/(2*m*sqrt(g*l));
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((sign(theta(2))*(theta(2)^2))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((abs(theta(2))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(t, theta(:, 1))
     xlabel("time")
     ylabel("Angular displacement")
@@ -20,7 +20,7 @@ hold off
 %Angular velocity for different damping values(b)
 for b = [0 1 2 3]
     zeta = (b*(l^3))/(2*m*sqrt(g*l));
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((sign(theta(2))*(theta(2)^2))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((abs(theta(2))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(t, theta(:, 2))
     xlabel("time")
     ylabel("Angular Velocity")
@@ -33,7 +33,7 @@ hold off
 %Phase space plots for different damping values(b)
 for b = [0 1 2 3]
     zeta = (b*(l^3))/(2*m*sqrt(g*l));
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((sign(theta(2))*(theta(2)^2))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((abs(theta(2))*(theta(2)))))], [0, 15], [pi/3, 0]);
     plot(theta(:, 1), theta(:, 2))
     xlabel("Angular displacement")
     ylabel("Angular velocity")
@@ -49,7 +49,7 @@ Q_2 = [];
 Q_3 = [];
 for b = [1 2 3]
     zeta = (b*(l^3))/(2*m*sqrt(g*l));
-    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((sign(theta(2))*(theta(2)^2))))], [0, 15], [pi/3, 0]);
+    [t,theta] = ode113(@(t,theta) [theta(2); (-(omega_n^2).*sin(theta(1)) -(2*zeta*omega_n).*((abs(theta(2))*(theta(2)))))], [0, 15], [pi/3, 0]);
     E = (0.5*m*(l^2)).*(theta(:, 2).^2) + (m*g*l).*(1 - cos(theta(:, 1)));
     plot(t, E)
     xlabel("time")
