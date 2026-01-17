@@ -1,0 +1,118 @@
+\documentclass[11pt,a4paper]{article}
+%% Welcome to Overleaf!
+%% If this is your first time using LaTeX, it might be worth going through this brief presentation:
+%% https://www.overleaf.com/latex/learn/free-online-introduction-to-latex-part-1
+
+%% Researchers have been using LaTeX for decades to typeset their papers, producing beautiful, crisp documents in the process. By learning LaTeX, you are effectively following in their footsteps, and learning a highly valuable skill!
+
+%% The \usepackage commands below can be thought of as analogous to importing libraries into Python, for instance. We've pre-formatted this for you, so you can skip right ahead to the title below.
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{natbib}
+\bibliographystyle{unsrt}
+%% Title
+\title{
+		\huge  Quality factor of 1 dof nonlinear damped pendulum   \\
+        \small (Computational Study)
+}
+\selectlanguage{english}
+\usepackage{authblk}
+\author {Abhimanyu Chaure}
+\date{17 January 2026}
+\begin{document}
+\maketitle
+
+\section{Problem Statement}
+What is the effect of velocity dependent nonlinear damping force defined as $F = -bv|v|^{n-1}$ on quality factor of the pendulum. Quality factor is defined as $Q = 2 \pi \times \frac{\text{Energy stored}}{\text{Energy loss per cycle}}.$
+
+\section{Introduction}
+Why is nonlinear damping considered here? Because quality factor is defined for Linear systems, and this study aims to find up to what extent physical interpretation of quality factor works in nonlinear damping.
+
+The nonlinear damping force is defined as $F = -bv|v|^{n-1}$, why is it defined this way?, Because damping in system resists the motion, and hence we model the damping force in such a way that it resists the motion considered. Why not defined as $F = -bv^n$ ?, because when $n$ is odd it is fine, but when $n$ is even then irrespective of the sign of velocity, the force will always act in one direction and will not resist the motion the way it is supposed to, and hence damping cannot be modeled as that way. Also here $||$ is a modulus function.
+
+Quality factor is a way to measure the energy decay, lesser the energy decay more the quality factor, we can call it as a performance parameter of the system. There are various definitions of quality factor, the one which will be used in this study is:
+\[
+Q = 2\pi \times \frac{\text{Energy stored}}{\text{Energy loss per cycle}}
+\]
+When we say energy stored, we are talking about the initial energy present in the cycle considered to find the energy loss. Hence one can define quality factor also as:
+\[
+Q = 2\pi \times \frac{\text{Energy stored at the start of the cycle}}{\text{Energy loss in that same cycle}}
+\]
+The equation considered here are nonlinear and hence elementary analytical solution is not possible, we solve the equations numerically. For numerical computations, MATLAB is used.
+
+
+\section{Assumptions}
+1) Ideal pivot: no hinge forces or resisting torque. \\
+2) It's motion is always in one plane with a single degree of freedom which is the angle it makes with the vertical. \\
+3) No electromagnetic forces.\\
+4) No relativistic effects.
+
+\section{Theory}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/Pendulum.png}
+    \caption{Pendulum with 1 dof}
+    \label{fig1}
+\end{figure}
+
+\begin{flushleft}
+As we have defined $F = -b|v|^{n-1}v$, let's express it in $\theta$
+\end{flushleft}
+We have $v=l\dot{\theta}$, therefore $F = -bl^n|\dot{\theta}|^{n-1}\dot{\theta}$ \\
+We will use Euler Lagrangian equations for finding equations of motion. \\
+\[
+T = \frac{1}{2}ml^2\dot{\theta}^2 \quad \text{and} \quad V = mgl(1 - \cos{\theta})
+\]
+
+Lagrangian of the system is:
+\[
+L = T - V = \frac{1}{2}ml^2\dot{\theta}^2 - mgl(1 - \cos{\theta})
+\]
+
+For generalized force we will use the fact that the work done remains same in both coordinate system. \\
+\[
+F \cdot dr = Q \cdot dq,\quad F = -bl^n|\dot{\theta}|^{n-1}\dot{\theta}, \quad dr  = ld\theta \; \text{and} \; dq = d\theta \implies Q = -bl^{n+1}|\dot{\theta}|^{n-1}\dot{\theta}
+\]
+
+Following is the Euler Lagrangian equation:
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}}\right) - \frac{\partial L}{\partial \theta} = Q_i
+\]
+
+Solving that will give us the equation of motion:
+\[
+ml^2\ddot{\theta} + mgl\sin{\theta} = -bl^{n+1}|\dot{\theta}|^{n-1}\dot{\theta}
+\]
+
+\[
+ml^2\ddot{\theta}  + bl^{n+1}|\dot{\theta}|^{n-1}\dot{\theta} + mgl\sin{\theta}= 0
+\]
+
+\section{Implementation}
+
+
+\section{Results}
+
+
+\section{Interpretations}
+
+
+\section{Limitations}
+
+
+\section*{Conclusions}
+
+\end{document}
